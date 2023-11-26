@@ -19,5 +19,5 @@ from django.urls import path, include
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('polls/', include('djangoCmsTester.polls.urls'))
+    path('polls/', include('polls.urls')) # This defers out a subtree where the provided file continues subordinate definitions/routes
 ]

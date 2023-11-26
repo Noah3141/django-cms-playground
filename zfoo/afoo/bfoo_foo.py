@@ -1,0 +1,4 @@
+class BFoo:
+    bok: str
+
+    
