@@ -1,2 +1,0 @@
-class AFoo:
-    bir: str

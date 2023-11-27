@@ -1,4 +1,0 @@
-class BFoo:
-    bok: str
-
-    

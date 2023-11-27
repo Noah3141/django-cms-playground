@@ -4,6 +4,7 @@ from django.template import loader
 from django.urls import reverse
 from .models import Question, Choice
 from django.views import generic
+from django.utils import timezone
 
 class IndexView(generic.ListView):
     template_name = "polls/index.html"
@@ -11,20 +12,26 @@ class IndexView(generic.ListView):
 
     def get_queryset(self):
         """Return the last five published questions."""
+        print("\n\nIndex view for Polls was triggered!\n\n")        
+        
         return Question.objects.order_by("-pub_date")[:5]
 
 
 class DetailView(generic.DetailView):
     model = Question
     template_name = "polls/detail.html"
-
+    def get_queryset(self):
+        """
+        Excludes any questions that aren't published yet.
+        """
+        return Question.objects.filter(pub_date__lte=timezone.now())
 
 class ResultsView(generic.DetailView):
     model = Question
     template_name = "polls/results.html"
 
-def vote(request, question_id):
-    question = get_object_or_404(Question, pk=question_id);
+async def vote(request, question_id):
+    question = await Question.objects.aget(pk=question_id); 
     try:
         selected_choice = question.choice_set.get(pk=request.POST["choice"])
     except (KeyError, Choice.DoesNotExist):

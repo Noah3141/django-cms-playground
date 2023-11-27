@@ -43,9 +43,20 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'cms',
     'menus',
-    'treebeard',
-    'polls.apps.PollsConfig'
+    'treebeard',   
+    'polls.apps.PollsConfig',
+    'zolls.apps.ZollsConfig',
+    'apples.apps.ApplesConfig',
 ]
+ # Go directory by directory, initializing each app. If app 1 and app 2 both have
+ # 1) An index.html,
+ # 2) A name='index' URL,
+ # 3) A view that at that URL that uses that index.html
+ # Overlapping URL patterns will of course cause a problem, but the app will choose the index.html located in the FIRST listed app above. 
+ # It is aggregating a big templates directory, and runs template names on that
+
+
+
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
