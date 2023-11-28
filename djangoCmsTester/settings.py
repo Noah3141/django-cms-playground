@@ -34,6 +34,7 @@ ALLOWED_HOSTS: list[str] = []
 # Application definition
 
 INSTALLED_APPS = [
+    'djangocms_admin_style', # Styles?
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.sites',
@@ -42,6 +43,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'cms',
+    'sekizai',
     'menus',
     'treebeard',   
     'polls.apps.PollsConfig',
@@ -62,11 +64,17 @@ MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
+    'django.middleware.locale.LocaleMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
-    'polls.middleware.LoggingMiddleware'
+    'polls.middleware.LoggingMiddleware',
+    'cms.middleware.user.CurrentUserMiddleware',
+    'cms.middleware.page.CurrentPageMiddleware',
+    'cms.middleware.toolbar.ToolbarMiddleware',
+    'cms.middleware.language.LanguageCookieMiddleware',
+    'cms.middleware.utils.ApphookReloadMiddleware',
 ]
 
 ROOT_URLCONF = 'djangoCmsTester.urls'
@@ -74,7 +82,7 @@ ROOT_URLCONF = 'djangoCmsTester.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [],
+        'DIRS': ['templatesRoot'],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -82,6 +90,9 @@ TEMPLATES = [
                 'django.template.context_processors.request',
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
+                'django.template.context_processors.i18n',
+                'sekizai.context_processors.sekizai',
+                'cms.context_processors.cms_settings',
             ],
         },
     },
@@ -138,7 +149,12 @@ AUTH_PASSWORD_VALIDATORS = [
 # Internationalization
 # https://docs.djangoproject.com/en/4.2/topics/i18n/
 
-LANGUAGE_CODE = 'en-us'
+LANGUAGE_CODE = 'en'
+LANGUAGES = [
+    ('en','English'),
+    ('de','German'),
+]
+
 
 TIME_ZONE = 'UTC'
 
@@ -173,3 +189,8 @@ LOGGING = {
 }
 
 SITE_ID=1 # Let the Django libraries know that I'm on localhost as the domain name
+
+
+CMS_TEMPLATES = [
+    ('home.html', 'Home page template'),
+]
