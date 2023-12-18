@@ -45,10 +45,8 @@ INSTALLED_APPS = [
     'cms',
     'sekizai',
     'menus',
-    'treebeard',   
-    'polls.apps.PollsConfig',
-    'zolls.apps.ZollsConfig',
-    'apples.apps.ApplesConfig',
+    'treebeard',
+    'blog'   
 ]
  # Go directory by directory, initializing each app. If app 1 and app 2 both have
  # 1) An index.html,
@@ -69,7 +67,6 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
-    'polls.middleware.LoggingMiddleware',
     'cms.middleware.user.CurrentUserMiddleware',
     'cms.middleware.page.CurrentPageMiddleware',
     'cms.middleware.toolbar.ToolbarMiddleware',

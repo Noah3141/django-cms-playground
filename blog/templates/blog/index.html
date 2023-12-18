@@ -1,0 +1,23 @@
+<script choices={{choices}} src="{% static 'blog.js' %}">
+
+
+
+<div  style="scale:300%; display: flex; justify-content: center; margin-top: 5rem;">
+    <select>
+        {% for choice in choices %}
+            <option  value="{{choice}}">
+                {{choice}}
+            </option>
+        {% endfor %}
+    </select>
+</div>
+
+
+<!--
+
+class LabeledChoice(NamedTuple):
+    id: int
+    display: str
+    api_str: str
+
+-->

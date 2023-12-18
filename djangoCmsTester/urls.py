@@ -16,14 +16,12 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path, include
+from blog.views import enum_types
 
-import zolls.views
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('polls/', include('polls.urls')), # This defers out a subtree where the provided file continues subordinate definitions/routes
-    path('apples/', include('apples.urls')),
+    # path('blog/', include('blog.urls')), # This defers out a subtree where the provided file continues subordinate definitions/routes
+    path('blog/', enum_types), # This defers out a subtree where the provided file continues subordinate definitions/routes
 
-    path('', include('zolls.urls'))
-    # path('', zolls.views.zoll)
 ]
